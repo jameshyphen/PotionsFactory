@@ -29,7 +29,7 @@ namespace BenjiMomentFactory
                     Console.WriteLine("You've killed a monster!");
                     var potionDropped = rng.DropPotion();
                     potionsInventory.Add(potionDropped);
-                    Console.WriteLine($"It dropped a: [{potionDropped.Name}]");
+                    Console.WriteLine($"It dropped a: [{potionDropped.Name}] potion +{potionDropped.Tier}");
                 }
 
             } while (input != 2);
@@ -57,14 +57,14 @@ namespace BenjiMomentFactory
 
             if (inputDrink != 99)
             {
-                var potion = potionsInventory[inputDrink];
+                var potion = potionsInventory[inputDrink - 1];
                 var attributesRestored = potion.Drink();
 
                 potionsInventory.Remove(potion);
 
                 var potionName = attributesRestored.Item1.ToString().ToLower();
 
-                Console.WriteLine($"You drink Tier {potion.Tier} {potionName} potion");
+                Console.WriteLine($"You drink Tier {potionName} potion +{potion.Tier}");
                 Console.WriteLine($"You've restored {attributesRestored.Item2} {potionName}.");
             }
         }
